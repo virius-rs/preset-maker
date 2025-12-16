@@ -1,16 +1,29 @@
 // src/api/get-preset.ts
 
-import axios from "axios";
-import { type Preset } from "../schemas/preset";
+import { type Preset, blankPreset } from "../schemas/preset";
 import { normalizePreset } from "../redux/store/reducers/normalizePreset";
-import { getDevHeaders } from "./get-headers";
-import { FunctionURLs } from "./function-urls";
+
+const REPO_OWNER = "virius-rs";
+const REPO_NAME = "preset-maker";
+const BRANCH = "main";
+const STORAGE_PATH = "presets";
 
 export async function getPreset(id: string): Promise<Preset> {
-  const { data } = await axios.get(
-    `${FunctionURLs.getPreset}?id=${encodeURIComponent(id)}`,
-    { headers: getDevHeaders() }
-  );
+  const url = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${STORAGE_PATH}/${id}.json`;
 
-  return normalizePreset(data);
+  try {
+    const res = await fetch(url);
+
+    if (!res.ok) {
+      console.warn(`Preset ${id} not found at ${url}`);
+      return blankPreset;
+    }
+
+    const data = await res.json();
+    return normalizePreset(data);
+
+  } catch (e) {
+    console.error("Failed to load preset", e);
+    return blankPreset;
+  }
 }

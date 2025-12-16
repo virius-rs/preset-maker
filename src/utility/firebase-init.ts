@@ -1,35 +1,26 @@
 // src/utility/firebase-init.ts
 
-import { initializeApp } from "firebase/app";
-import {
-  getAuth as _getAuth,
-  signInWithCustomToken as _signInWithCustomToken,
-  onAuthStateChanged as _onAuthStateChanged
-} from "firebase/auth";
+const mockAuth = {
+  currentUser: null,
 
-let app: any = null;
+  onIdTokenChanged: (callback: (user: any) => void) => {
+    callback(null);
+    return () => {};
+  },
 
-function ensureFirebase() {
-  if (!app) {
-    app = initializeApp({
-      apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-      authDomain: "pvmebackend.firebaseapp.com",
-      projectId: "pvmebackend",
-    });
-  }
-}
+  signOut: () => Promise.resolve(),
+};
 
 export function getAuth() {
-  ensureFirebase();
-  return _getAuth();
+  return mockAuth as any;
 }
 
 export function signInWithCustomToken(auth: any, token: string) {
-  ensureFirebase();
-  return _signInWithCustomToken(auth, token);
+  console.log("LOCAL MODE: Fake sign-in triggered.");
+  return Promise.resolve({ user: { uid: "local-user" } });
 }
 
 export function onAuthStateChanged(auth: any, callback: (user: any) => void) {
-  ensureFirebase();
-  return _onAuthStateChanged(auth, callback);
+  callback(null);
+  return () => {};
 }

@@ -1,11 +1,12 @@
 // src/storage/preset-storage.ts
 
 import { LocalPresetStorage } from "./LocalPresetStorage";
-import { CloudPresetStorage } from "./CloudPresetStorage";
 import { normalizePreset } from "../redux/store/reducers/normalizePreset";
 import { type Preset } from "../schemas/preset";
 import { type PresetSummary } from "../schemas/preset-summary";
 import { type SavedPreset } from "../schemas/saved-preset-data";
+import { getPreset as getRemotePreset } from "../api/get-preset";
+import { uploadPreset } from "../api/upload-preset";
 
 export const loadPresetById = async (
   id: string
@@ -15,32 +16,36 @@ export const loadPresetById = async (
   source: "local" | "cloud";
 }> => {
   try {
-    const raw: SavedPreset = await LocalPresetStorage.getPreset(id);
+    const raw = await LocalPresetStorage.getPreset(id);
     const normalised = await normalizePreset(raw);
-
     return {
       data: normalised,
       presetId: raw.presetId ?? id,
       source: "local",
     };
-  } catch {
-    const raw: SavedPreset = await CloudPresetStorage.getPreset(id);
-    const normalised = await normalizePreset(raw);
-
+  } catch (e) {
+    console.log(`Local load failed for ${id}, trying GitHub...`);
+    const remoteData = await getRemotePreset(id);
+    
     return {
-      data: normalised,
-      presetId: raw.presetId ?? id,
+      data: remoteData,
+      presetId: id,
       source: "cloud",
     };
   }
 };
 
-//
-// Storage adapter contract (RAW only)
-//
-export interface PresetStorage {
-  getPreset(id: string): Promise<SavedPreset>;
-  savePreset(preset: SavedPreset, id?: string): Promise<string>;
-  listRecentPresets(): Promise<PresetSummary[]>;
-  saveToRecentPresets(summary: PresetSummary): void;
-}
+export const PresetStorageShim = {
+  async savePreset(preset: SavedPreset, id?: string): Promise<string> {
+    const result = await uploadPreset(preset, id);
+    return result.id;
+  },
+
+  async listRecentPresets(): Promise<PresetSummary[]> {
+    return LocalPresetStorage.listRecentPresets();
+  },
+
+  saveToRecentPresets(summary: PresetSummary): void {
+    LocalPresetStorage.saveToRecentPresets(summary);
+  }
+};
