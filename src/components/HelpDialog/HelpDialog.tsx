@@ -46,21 +46,6 @@ export const HelpDialog = ({
               </ul>
             </Typography>
           </div>
-          <Divider className="mv-8" />
-          <div>
-            <Typography variant="h6" className="help-dialog__heading">Support</Typography>
-            <Typography variant="body2" className="help-dialog__body d-flex flex-center">
-              <ForumIcon className="mr-8"/>
-              <Link className="mr-8" href="https://discord.com/channels/534508796639182860/1020853673317908500">
-                Suggestions
-              </Link>
-              <Divider className="mh-8" orientation="vertical" flexItem />
-              <GitHubIcon className="mr-8"/>
-              <Link href="https://github.com/pvme/preset-maker">
-                GitHub
-              </Link>
-            </Typography>
-          </div>
         </DialogContent>
         <DialogActions sx={{ justifyContent: "space-between", px: 2 }}>
           <Typography variant="caption" sx={{ opacity: 0.6 }}>

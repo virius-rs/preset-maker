@@ -14,6 +14,7 @@ import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 import Button from '@mui/material/Button';
 
+import HomeIcon from '@mui/icons-material/Home';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
@@ -62,20 +63,11 @@ export const HeaderBar = (): JSX.Element => {
                 <Tooltip title="Go to Home">
                   <IconButton
                     onClick={onHomeClick}
-                    className="header-bar__logo-button"
                     size="large"
                     edge="start"
+                    color="inherit"
                   >
-                    <Box
-                      component="img"
-                      src="https://img.pvme.io/images/EPzzJe2xy6.gif"
-                      alt="PvME Logo"
-                      className="header-bar__logo-image"
-                      sx={{
-                        width: { xs: 60, sm: 80 },
-                        height: { xs: 60, sm: 80 }
-                      }}
-                    />
+                    <HomeIcon sx={{ fontSize: { xs: 30, sm: 40 } }} />
                   </IconButton>
                 </Tooltip>
               </Stack>

@@ -2,6 +2,10 @@
 
 A web app for building RS3 presets and inventories, built with Vite.
 
+Credit to PvME https://github.com/pvme/preset-maker for creating the original version.
+
+This fork restores the ability to tweak and re-generate presets freely, without needing PvMEs permission.
+
 Production URL: https://virius-rs.github.io/preset-maker/
 
 ## Getting started
@@ -55,5 +59,3 @@ To sort new familiars:
 ```sh
 yarn run sort-familiars
 ```
-
-Credit to PvME https://github.com/pvme/preset-maker for creating the original version.
