@@ -35,6 +35,13 @@ export const loadPresetById = async (
   }
 };
 
+export interface PresetStorage {
+  getPreset(id: string): Promise<SavedPreset>;
+  savePreset(preset: SavedPreset, id?: string): Promise<string>;
+  listRecentPresets(): Promise<PresetSummary[]>;
+  saveToRecentPresets(summary: PresetSummary): void;
+}
+
 export const PresetStorageShim = {
   async savePreset(preset: SavedPreset, id?: string): Promise<string> {
     const result = await uploadPreset(preset, id);
