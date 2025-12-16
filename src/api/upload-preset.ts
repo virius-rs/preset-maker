@@ -2,7 +2,7 @@
 
 import { type SavedPreset } from "../schemas/saved-preset-data";
 
-const API_BASE = "https://preset-maker.vercel.app/";
+const API_BASE = "https://preset-maker.vercel.app";
 const API_URL = `${API_BASE}/api/save-preset`;
 
 interface UploadPresetResponse {
