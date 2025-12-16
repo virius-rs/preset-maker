@@ -1,13 +1,15 @@
 import { Octokit } from "@octokit/rest";
 
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+
 const REPO_OWNER = "virius-rs";
 const REPO_NAME = "preset-maker";
 const STORAGE_PATH = "presets";
+const BRANCH = "master";
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', 'https://virius-rs.github.io');
+  res.setHeader('Access-Control-Allow-Origin', '*'); 
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
   res.setHeader(
     'Access-Control-Allow-Headers',
@@ -25,6 +27,7 @@ export default async function handler(req, res) {
 
   try {
     const { data } = req.body;
+    
     const id = crypto.randomUUID();
     const filename = `${STORAGE_PATH}/${id}.json`;
 
@@ -36,13 +39,16 @@ export default async function handler(req, res) {
       path: filename,
       message: `feat: add preset ${id} [skip ci]`,
       content: content,
-      branch: "main",
+      branch: BRANCH,
     });
 
     return res.status(200).json({ id });
 
   } catch (error) {
     console.error("Save failed:", error);
-    return res.status(500).json({ error: "Failed to save preset." });
+    return res.status(500).json({ 
+      error: "Failed to save preset.", 
+      details: error.message 
+    });
   }
 }
