@@ -2,6 +2,9 @@
 
 import { type SavedPreset } from "../schemas/saved-preset-data";
 
+const API_BASE = "https://preset-maker.vercel.app/";
+const API_URL = `${API_BASE}/api/save-preset`;
+
 interface UploadPresetResponse {
   id: string;
   imageUrl: string;
@@ -11,10 +14,10 @@ export async function uploadPreset(
   data: SavedPreset,
   id?: string
 ): Promise<UploadPresetResponse> {
-  console.log("Uploading preset via API...", data.presetName);
+  console.log("Uploading preset via Vercel API...", data.presetName);
 
   try {
-    const response = await fetch('/api/save-preset', {
+    const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +33,7 @@ export async function uploadPreset(
 
     return {
       id: result.id,
-      imageUrl: "" // no
+      imageUrl: "" // No
     };
 
   } catch (error) {
