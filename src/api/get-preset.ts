@@ -5,7 +5,7 @@ import { normalizePreset } from "../redux/store/reducers/normalizePreset";
 
 const REPO_OWNER = "virius-rs";
 const REPO_NAME = "preset-maker";
-const BRANCH = "main";
+const BRANCH = "master";
 const STORAGE_PATH = "presets";
 
 export async function getPreset(id: string): Promise<Preset> {
