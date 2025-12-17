@@ -1,0 +1,219 @@
+{
+  "presetName": "relic/familiar data test",
+  "presetNotes": "<div>111</div><div><br /></div><div>:bloodrune:</div>",
+  "inventorySlots": [
+    {
+      "id": "achtoprimevaltop"
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": "celestialhandwraps"
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    }
+  ],
+  "equipmentSlots": [
+    {
+      "id": ""
+    },
+    {
+      "id": "igneouskalxil"
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    },
+    {
+      "id": ""
+    }
+  ],
+  "familiars": {
+    "primaryFamiliars": [
+      {
+        "id": "waterfiendpouch"
+      }
+    ],
+    "alternativeFamiliars": [
+      {
+        "id": ""
+      },
+      {
+        "id": ""
+      },
+      {
+        "id": ""
+      }
+    ]
+  },
+  "relics": {
+    "primaryRelics": [
+      {
+        "id": "blessingofhet"
+      },
+      {
+        "id": ""
+      },
+      {
+        "id": ""
+      }
+    ],
+    "alternativeRelics": [
+      {
+        "id": ""
+      },
+      {
+        "id": ""
+      },
+      {
+        "id": ""
+      }
+    ]
+  },
+  "breakdown": [
+    {
+      "slotType": "inventory",
+      "slotIndex": 1,
+      "description": ""
+    },
+    {
+      "slotType": "inventory",
+      "slotIndex": 16,
+      "description": ":bloodrune:"
+    },
+    {
+      "slotType": "relic",
+      "slotIndex": 0,
+      "description": "dsfgfdsgdsfg :deathrune:"
+    },
+    {
+      "slotType": "familiar",
+      "slotIndex": 0,
+      "description": "12dfssdaxfg"
+    },
+    {
+      "slotType": "equipment",
+      "slotIndex": 1,
+      "description": "1111"
+    },
+    {
+      "slotType": "inventory",
+      "slotIndex": 2,
+      "description": ""
+    },
+    {
+      "slotType": "inventory",
+      "slotIndex": 12,
+      "description": ""
+    },
+    {
+      "slotType": "inventory",
+      "slotIndex": 0,
+      "description": "sdafsadfasdf"
+    }
+  ],
+  "slotType": 0,
+  "slotIndex": 16,
+  "selectedSlots": [],
+  "slotKey": "inventory:16"
+}
