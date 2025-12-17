@@ -1,90 +1,90 @@
 {
-  "presetName": "Solak test",
-  "presetNotes": "boop",
+  "presetName": "Solak Duo - Base",
+  "presetNotes": "Guthix rests can be substituted for Saradomin brews if needed",
   "inventorySlots": [
+    {
+      "id": "adrenrenewal"
+    },
+    {
+      "id": "fsoa"
+    },
+    {
+      "id": "roarofawakening"
+    },
+    {
+      "id": "dummy"
+    },
     {
       "id": "tumekenmask"
     },
     {
-      "id": ""
+      "id": "tumekenrobetop"
     },
     {
-      "id": ""
+      "id": "graspingpouch"
     },
     {
-      "id": ""
+      "id": "channellersring"
     },
     {
-      "id": ""
+      "id": "zealots"
     },
     {
-      "id": ""
+      "id": "lengmh"
     },
     {
-      "id": ""
+      "id": "dummy"
     },
     {
-      "id": ""
+      "id": "tumekenrobebottom"
     },
     {
-      "id": ""
+      "id": "tumekenboots"
     },
     {
-      "id": ""
+      "id": "graspingpouchblue"
     },
     {
-      "id": ""
+      "id": "supergrest"
     },
     {
-      "id": ""
+      "id": "supergrest"
     },
     {
-      "id": ""
+      "id": "ezk"
     },
     {
-      "id": ""
+      "id": "zgs"
     },
     {
-      "id": ""
+      "id": "ecb"
     },
     {
-      "id": ""
+      "id": "tumekengloves"
     },
     {
-      "id": ""
+      "id": "graspingpouchblack"
     },
     {
-      "id": ""
+      "id": "blueblubber"
     },
     {
-      "id": ""
+      "id": "blueblubber"
     },
     {
-      "id": ""
+      "id": "blueblubber"
     },
     {
-      "id": ""
+      "id": "excal"
     },
     {
-      "id": ""
+      "id": "powerburstofvitality"
     },
     {
-      "id": ""
+      "id": "vulnbombs"
     },
     {
-      "id": ""
-    },
-    {
-      "id": ""
-    },
-    {
-      "id": ""
-    },
-    {
-      "id": ""
-    },
-    {
-      "id": ""
+      "id": "zemouregalsnexus"
     }
   ],
   "equipmentSlots": [
@@ -92,19 +92,19 @@
       "id": "vestmentsofhavochood"
     },
     {
-      "id": ""
+      "id": "igneouskalzuk"
     },
     {
-      "id": ""
+      "id": "eofred"
     },
     {
-      "id": ""
+      "id": "dba"
     },
     {
       "id": "vestmentsofhavoctop"
     },
     {
-      "id": ""
+      "id": "lengoh"
     },
     {
       "id": "vestmentsofhavocbottom"
@@ -116,13 +116,13 @@
       "id": "vestmentsofhavocboots"
     },
     {
-      "id": ""
+      "id": "reaverring"
     },
     {
-      "id": ""
+      "id": "hydrixbakristack"
     },
     {
-      "id": ""
+      "id": "invigorate"
     },
     {
       "id": "grim"
@@ -131,7 +131,7 @@
   "familiars": {
     "primaryFamiliars": [
       {
-        "id": ""
+        "id": "kalgdemon"
       }
     ],
     "alternativeFamiliars": [
@@ -149,13 +149,13 @@
   "relics": {
     "primaryRelics": [
       {
-        "id": ""
+        "id": "berserkersfury"
       },
       {
-        "id": ""
+        "id": "conservationofenergy"
       },
       {
-        "id": ""
+        "id": "fontoflife"
       }
     ],
     "alternativeRelics": [
@@ -171,8 +171,8 @@
     ]
   },
   "breakdown": [],
-  "slotType": 0,
-  "slotIndex": 0,
+  "slotType": 1,
+  "slotIndex": 12,
   "selectedSlots": [],
-  "slotKey": "inventory:0"
+  "slotKey": "equipment:12"
 }
