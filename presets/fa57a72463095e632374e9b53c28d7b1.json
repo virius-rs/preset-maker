@@ -1,0 +1,189 @@
+{
+  "presetName": "Solak Duo - Base",
+  "presetNotes": "<div>:supergrest: can be substituted for :brew:/:supersara: if needed</div>ghfutuyru",
+  "inventorySlots": [
+    {
+      "id": "adrenrenewal"
+    },
+    {
+      "id": "fsoa"
+    },
+    {
+      "id": "roarofawakening"
+    },
+    {
+      "id": "dummy"
+    },
+    {
+      "id": "tumekenmask"
+    },
+    {
+      "id": "tumekenrobetop"
+    },
+    {
+      "id": "graspingpouch"
+    },
+    {
+      "id": "channellersring"
+    },
+    {
+      "id": "zealots"
+    },
+    {
+      "id": "lengmh"
+    },
+    {
+      "id": "dummy"
+    },
+    {
+      "id": "tumekenrobebottom"
+    },
+    {
+      "id": "tumekenboots"
+    },
+    {
+      "id": "graspingpouchblue"
+    },
+    {
+      "id": "supergrest"
+    },
+    {
+      "id": "supergrest"
+    },
+    {
+      "id": "ezk"
+    },
+    {
+      "id": "zgs"
+    },
+    {
+      "id": "ecb"
+    },
+    {
+      "id": "tumekengloves"
+    },
+    {
+      "id": "graspingpouchblack"
+    },
+    {
+      "id": "blueblubber"
+    },
+    {
+      "id": "blueblubber"
+    },
+    {
+      "id": "blueblubber"
+    },
+    {
+      "id": "excal"
+    },
+    {
+      "id": "powerburstofvitality"
+    },
+    {
+      "id": "vulnbombs"
+    },
+    {
+      "id": "zemouregalsnexus"
+    }
+  ],
+  "equipmentSlots": [
+    {
+      "id": "vestmentsofhavochood"
+    },
+    {
+      "id": "igneouskalzuk"
+    },
+    {
+      "id": "eofred"
+    },
+    {
+      "id": "dba"
+    },
+    {
+      "id": "vestmentsofhavoctop"
+    },
+    {
+      "id": "lengoh"
+    },
+    {
+      "id": "vestmentsofhavocbottom"
+    },
+    {
+      "id": "cinderbanes"
+    },
+    {
+      "id": "vestmentsofhavocboots"
+    },
+    {
+      "id": "reaverring"
+    },
+    {
+      "id": "hydrixbakristack"
+    },
+    {
+      "id": "invigorate"
+    },
+    {
+      "id": "grim"
+    }
+  ],
+  "familiars": {
+    "primaryFamiliars": [
+      {
+        "id": "kalgdemon"
+      }
+    ],
+    "alternativeFamiliars": [
+      {
+        "id": ""
+      },
+      {
+        "id": ""
+      },
+      {
+        "id": ""
+      }
+    ]
+  },
+  "relics": {
+    "primaryRelics": [
+      {
+        "id": "berserkersfury"
+      },
+      {
+        "id": "conservationofenergy"
+      },
+      {
+        "id": "fontoflife"
+      }
+    ],
+    "alternativeRelics": [
+      {
+        "id": ""
+      },
+      {
+        "id": ""
+      },
+      {
+        "id": ""
+      }
+    ]
+  },
+  "breakdown": [
+    {
+      "slotType": "inventory",
+      "slotIndex": 3,
+      "description": ":dummy: :dummy: :dummy: :dummy: :dummy:"
+    },
+    {
+      "slotType": "inventory",
+      "slotIndex": 5,
+      "description": ":supersara:test test est"
+    }
+  ],
+  "slotType": 0,
+  "slotIndex": -1,
+  "selectedSlots": [],
+  "slotKey": ""
+}
