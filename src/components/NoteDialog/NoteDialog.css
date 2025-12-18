@@ -1,0 +1,31 @@
+/* src/components/NoteDialog/NoteDialog.css */
+
+.note-dialog__paper {
+    background-color: #121212 !important;
+    color: #e2e8f0 !important;
+    border: 1px solid #333;
+    background-image: none !important;
+}
+
+.note-dialog__header {
+    border-bottom: 1px solid #333;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+
+.note-dialog__container {
+    position: relative;
+    min-height: 120px;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 12px;
+    background-color: #0b0b0b; 
+    cursor: text;
+    transition: border-color 0.2s;
+}
+
+.note-dialog__container:focus-within {
+    border-color: #3B82F6;
+    box-shadow: 0 0 0 1px #3B82F6;
+}

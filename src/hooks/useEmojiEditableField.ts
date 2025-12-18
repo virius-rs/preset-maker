@@ -1,3 +1,5 @@
+// src/hooks/useEmojiEditableField.ts
+
 import { useCallback, useEffect, useRef, useState } from "react";
 import sanitizeHtml from "sanitize-html";
 import { emojify } from "../utility/emojify";
@@ -25,13 +27,11 @@ export function useEmojiEditableField({
 
   const [html, setHtml] = useState(() => emojify(value ?? ""));
 
-  // Initial + external sync (ONLY when not editing)
   useEffect(() => {
     if (isFocused.current) return;
 
     setHtml(emojify(value ?? ""));
 
-    // 🔁 Retry once after emoji index initialises
     const t = setTimeout(() => {
       if (!isFocused.current) {
         setHtml(emojify(value ?? ""));
@@ -59,8 +59,8 @@ export function useEmojiEditableField({
     isFocused.current = true;
   }, []);
 
-  const onChange = useCallback(() => {
-    // Browser owns DOM while focused
+  const onChange = useCallback((newVal: string) => {
+    setHtml(newVal);
   }, []);
 
   const onBlur = useCallback(() => {

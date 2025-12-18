@@ -28,12 +28,14 @@ export const PresetBreakdown = (): JSX.Element | null => {
 
   const [drafts, setDrafts] = useState<Record<DraftKey, string>>({});
 
-  // Sync drafts from Redux
   useEffect(() => {
     const next: Record<DraftKey, string> = {};
 
     for (const b of preset.breakdown) {
-      next[`${b.slotType}-${b.slotIndex}`] = b.description;
+      if (b.slotType === "inventory" || b.slotType === "equipment") {
+        const key = `${b.slotType}-${b.slotIndex}` as DraftKey;
+        next[key] = b.description;
+      }
     }
 
     setDrafts(next);

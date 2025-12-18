@@ -2,10 +2,9 @@
 
 A web app for building RS3 presets and inventories, built with Vite.
 
-Credit to PvME https://github.com/pvme/preset-maker for creating the original version.
-This fork restores the ability to tweak and re-generate presets freely, without needing PvMEs permission.
-
 Production URL: https://virius-rs.github.io/preset-maker/
+
+Credit to PvME for creating the [original version](https://github.com/pvme/preset-maker).
 
 ## Getting started
 
@@ -15,22 +14,16 @@ Install dependencies:
 yarn install
 ```
 
-Run a local development front-end server connected to a local back-end server:
+Run a local development front-end server
 
 ```sh
-yarn run dev
-```
-
-Run a local development front-end server connected to the production back-end server:
-
-```sh
-yarn run dev:prod
+yarn dev
 ```
 
 Build & push to repo (branch: gh-pages)
 
 ```sh
-npm run deploy
+yarn deploy
 ```
 
 ## Sorting JSON

@@ -1,3 +1,5 @@
+/* src/components/SlotSection/SlotSection.css */
+
 .inventory-icon-container,
 .equipment-icon-container {
   position: absolute;
@@ -10,7 +12,7 @@
   border: 2px solid transparent;
   transition: border-color 120ms ease;
 
-  /* allow hover! */
+  /* Allow hover */
   pointer-events: auto;
 }
 
@@ -24,12 +26,13 @@
   height: 32px;
 }
 
-area:hover + .inventory-icon-container,
-area:hover + .equipment-icon-container {
+/* Reverted hover color to soft white */
+.slot-hitbox:hover + .inventory-icon-container,
+.slot-hitbox:hover + .equipment-icon-container {
   border-color: rgba(255,255,255,0.4);
 }
 
-/* Selected outline */
+/* Selected outline remains the accent color */
 .inventory-icon-container.selected,
 .equipment-icon-container.selected {
   border-color: var(--accentColour);

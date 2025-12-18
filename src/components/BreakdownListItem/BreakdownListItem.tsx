@@ -1,10 +1,11 @@
+// src/components/BreakdownListItem/BreakdownListItem.tsx
+
 import React from "react";
 import ListItem from "@mui/material/ListItem";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import ContentEditable from "react-contenteditable";
 
-import { useEmojiEditableField } from "../../hooks/useEmojiEditableField";
+import { RichTextEmojiInput } from "../RichText/RichTextEmojiInput";
 import { type EmojiMaps } from "../../hooks/useEmojiMap";
 
 interface Props {
@@ -20,12 +21,6 @@ export const BreakdownListItem = ({
   itemId,
   onCommit,
 }: Props): JSX.Element | null => {
-  const field = useEmojiEditableField({
-    value: description,
-    allowMultiline: true,
-    onCommit,
-  });
-
   const emoji = emojiMap.get(itemId);
   if (!emoji) return null;
 
@@ -39,7 +34,11 @@ export const BreakdownListItem = ({
         className="breakdown-item-left"
         sx={{ display: "flex", alignItems: "center", gap: 1 }}
       >
-        {imageUrl && <div className="breakdown-image-wrapper"><img src={imageUrl} alt={emoji.name} width={38} /></div>}
+        {imageUrl && (
+          <div className="breakdown-image-wrapper">
+            <img src={imageUrl} alt={emoji.name} width={38} />
+          </div>
+        )}
 
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <span>{emoji.name}</span>
@@ -56,13 +55,16 @@ export const BreakdownListItem = ({
       </Box>
 
       <Box className="breakdown-description-wrapper">
-        <ContentEditable
-          innerRef={field.ref}
-          html={field.html}
+        <RichTextEmojiInput
+          value={description}
+          onChange={onCommit}
+          allowMultiline={true}
           className="breakdown-description-editable"
-          onFocus={field.onFocus}
-          onChange={field.onChange}
-          onBlur={field.onBlur}
+          style={{ 
+            minHeight: '24px', 
+            padding: '8px', 
+            fontSize: '0.9rem' 
+          }}
         />
       </Box>
     </ListItem>

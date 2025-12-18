@@ -1,49 +1,29 @@
-import React from 'react';
+// src/components/PresetSection/PresetSection.tsx
 
-import { PresetBreakdown } from '../PresetBreakdown/PresetBreakdown';
+import React from 'react';
+import { Container, Grid } from '@mui/material';
+
 import { PresetEditor } from '../PresetEditor/PresetEditor';
 import { PresetDetails } from '../PresetDetails/PresetDetails';
-import PresetMenu from '../Menu/Menu';
-
-import { Container, Fade, Grid } from '@mui/material';
 import './PresetSection.css';
 
 export const PresetSection = (): JSX.Element => {
   return (
     <>
-      <Container>
-        <Grid container spacing={2} direction="column">
+      <Container maxWidth="xl" sx={{ mt: 3, mb: 3 }}>
+        <Grid 
+          container 
+          spacing={3} 
+          direction="row" 
+          justifyContent="center" 
+          alignItems="flex-start"
+        >
           <Grid item>
-            <PresetMenu />
+            <PresetEditor />
           </Grid>
 
           <Grid item>
-            <Grid container direction="row">
-              <Grid item>
-                <PresetEditor />
-              </Grid>
-              <Grid
-                item
-                xs
-                sx={{
-                  '& .MuiPaper-root': {
-                    borderTopLeftRadius: 0,
-                    borderBottomLeftRadius: 0,
-                    marginTop: 2
-                  },
-                }}
-              >
-                <PresetDetails />
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Container>
-
-      <Container maxWidth={'xl'}>
-        <Grid container sx={{ marginBottom: 3}} >
-          <Grid item xs={12}>
-            <PresetBreakdown />
+            <PresetDetails />
           </Grid>
         </Grid>
       </Container>

@@ -1,7 +1,13 @@
 // src/components/SlotSection/SlotSection.tsx
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { DragPreviewImage, useDrag, useDrop } from "react-dnd";
+import { styled } from "@mui/material/styles";
+import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import Divider from "@mui/material/Divider";
 
 import {
   equipmentCoords,
@@ -20,6 +26,21 @@ import { selectPreset } from "../../redux/store/reducers/preset-reducer";
 
 import "./SlotSection.css";
 
+const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: '#000000',
+    color: '#e2e8f0',
+    maxWidth: 300,
+    border: '1px solid #333',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
+    padding: '12px',
+    fontSize: '16px',
+    lineHeight: '2.2', 
+  },
+}));
+
 interface SlotProps {
   slots: ItemData[];
   handleClickOpen: (e: any, index: number, slotGroup: string) => void;
@@ -29,6 +50,7 @@ interface SlotProps {
     targetIndex: number
   ) => void;
   handleShiftClick?: (e: any, index: number, slotGroup: string) => void;
+  handleContextMenu?: (e: React.MouseEvent, index: number, slotGroup: string) => void;
 }
 
 interface SlotSectionProps extends SlotProps {
@@ -50,15 +72,55 @@ const SingleSlot = ({
   handleClickOpen,
   handleShiftClick,
   handleDragAndDrop,
+  handleContextMenu,
 }: SingleSlotProps): JSX.Element | null => {
   const slot = slots[index];
   if (!slot) return null;
 
   const maps = useEmojiMap();
-  const { selectedSlots } = useAppSelector(selectPreset);
+  const { selectedSlots, breakdown } = useAppSelector(selectPreset);
 
   const entry = slot.id && maps ? maps.get(slot.id) : undefined;
   const emojiUrl = entry && maps ? maps.getUrl(entry.id) ?? "" : "";
+
+  const style = useMemo(() => ({
+    left: coord.x1,
+    top: coord.y1,
+    width: coord.x2 - coord.x1,
+    height: coord.y2 - coord.y1,
+    position: 'absolute' as const,
+  }), [coord]);
+
+  const breakdownEntry = breakdown.find(
+    (b) => b.slotType === slotGroup && b.slotIndex === index
+  );
+  
+  const rawNote = breakdownEntry?.description || "";
+  
+  const parsedNote = useMemo(() => {
+    if (!rawNote || !maps) return rawNote;
+    
+    return rawNote.replace(/:([a-zA-Z0-9_]+):/g, (match: string, name: string) => {
+      const cleanName = name.replace(/_/g, ' ').toLowerCase();
+      
+      let foundId = "";
+      if (maps.resolve) { foundId = maps.resolve(cleanName); }
+      
+      if (foundId) {
+         const url = maps.getUrl(foundId);
+         if (url) {
+             return `<img 
+                src="${url}" 
+                alt="${name}" 
+                class="disc-emoji" 
+                style="width: calc(34px * 0.8); height: calc(34px * 0.8); vertical-align: middle; margin: 0 2px; transform: translateY(-2px);"
+             />`;
+         }
+      }
+      
+      return match; 
+    });
+  }, [rawNote, maps]);
 
   const slotKey = `${slotGroup}:${index}`;
   const slotIsSelected = selectedSlots.includes(slotKey);
@@ -68,9 +130,8 @@ const SingleSlot = ({
       slotIsSelected ? "selected" : ""
     }`;
 
-
   const onSlotSelect = useCallback(
-    (e: React.MouseEvent<HTMLAreaElement>) => {
+    (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.shiftKey && handleShiftClick) {
         handleShiftClick(e, index, slotGroup);
       } else {
@@ -80,27 +141,25 @@ const SingleSlot = ({
     [handleShiftClick, handleClickOpen, index, slotGroup]
   );
 
-  //
-  // DRAG SOURCE — unified type "SLOT_ITEM"
-  //
+  const onNoteClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (handleContextMenu) {
+        e.stopPropagation(); 
+        handleContextMenu(e, index, slotGroup);
+      }
+    },
+    [handleContextMenu, index, slotGroup]
+  );
+
   const [{ opacity }, dragRef, dragPreview] = useDrag(
     () => ({
       type: "SLOT_ITEM",
-      item: {
-        fromGroup: slotGroup,
-        index,
-        id: slot.id,
-      },
-      collect: (monitor) => ({
-        opacity: monitor.isDragging() ? 0.5 : 1,
-      }),
+      item: { fromGroup: slotGroup, index, id: slot.id },
+      collect: (monitor) => ({ opacity: monitor.isDragging() ? 0.5 : 1 }),
     }),
     [slotGroup, index, slot.id]
   );
 
-  //
-  // DROP TARGET — accepts any SLOT_ITEM
-  //
   const [, dropRef] = useDrop(
     () => ({
       accept: "SLOT_ITEM",
@@ -113,27 +172,102 @@ const SingleSlot = ({
     [handleDragAndDrop, slotGroup, index]
   );
 
+  const tooltipContent = entry ? (
+    <Box>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1 }}>
+            {emojiUrl && <img src={emojiUrl} alt="" style={{ width: 32, height: 32 }} />}
+            <Box>
+                <Typography variant="subtitle2" sx={{ fontWeight: 'bold', color: '#fff' }}>
+                    {entry.name}
+                </Typography>
+                <Link 
+                    href={`https://runescape.wiki/w/${entry.name.replace(/ /g, '_')}`} 
+                    target="_blank" 
+                    rel="noopener"
+                    sx={{ fontSize: '0.75rem', color: '#3B82F6', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}
+                >
+                    Open on Wiki
+                </Link>
+            </Box>
+        </Box>
+        
+        {rawNote ? (
+            <Box 
+                onClick={onNoteClick}
+                sx={{ 
+                    cursor: 'pointer', 
+                    borderRadius: 1,
+                    transition: 'background-color 0.2s',
+                    '&:hover': { bgcolor: 'rgba(255,255,255,0.05)' } 
+                }}
+            >
+                <Divider sx={{ my: 1, bgcolor: 'rgba(255,255,255,0.1)' }} />
+                <Typography variant="caption" sx={{ color: '#94a3b8', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
+                    NOTE <span>(Edit)</span>
+                </Typography>
+                <div 
+                    style={{ color: '#e2e8f0', whiteSpace: 'pre-wrap' }}
+                    dangerouslySetInnerHTML={{ __html: parsedNote }} 
+                />
+            </Box>
+        ) : (
+            <Box 
+                onClick={onNoteClick}
+                sx={{ 
+                    mt: 1, 
+                    cursor: 'pointer',
+                    '&:hover .add-note-text': { textDecoration: 'underline' } 
+                }}
+            >
+               <Typography 
+                 variant="caption" 
+                 className="add-note-text"
+                 sx={{ display: 'block', color: '#3B82F6', fontWeight: 'bold' }}
+               >
+                   + Click to add note
+               </Typography>
+            </Box>
+        )}
+    </Box>
+  ) : null;
+
   return (
     <>
       {emojiUrl && <DragPreviewImage connect={dragPreview} src={emojiUrl} />}
 
-      <div ref={dropRef} style={{ position: "relative" }}>
-        <div ref={dragRef}>
-          <area
-            shape="rect"
-            coords={`${coord.x1},${coord.y1},${coord.x2},${coord.y2}`}
-            title={entry?.name ?? ""}
-            style={{ cursor: "pointer", opacity, userSelect: "auto" }}
-            onClick={onSlotSelect}
-          />
+      <div ref={dropRef} style={style}>
+        <div ref={dragRef} style={{ width: '100%', height: '100%', position: 'relative' }}>
+          
+          <HtmlTooltip 
+            title={tooltipContent} 
+            arrow 
+            placement="bottom" 
+            leaveDelay={200}
+          >
+            <div
+                className="slot-hitbox"
+                style={{ 
+                    position: "absolute",
+                    width: "100%", 
+                    height: "100%", 
+                    zIndex: 2, 
+                    cursor: "pointer",
+                    opacity: opacity 
+                }}
+                onClick={onSlotSelect}
+            />
+          </HtmlTooltip>
 
           <div
             className={getClassName()}
             style={{
               position: "absolute",
-              top: coord.y1,
-              left: coord.x1,
-              pointerEvents: "none",
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              pointerEvents: "none", 
+              zIndex: 1
             }}
           >
             {emojiUrl && (
@@ -158,6 +292,7 @@ const SlotSection = ({
   handleClickOpen,
   handleShiftClick,
   handleDragAndDrop,
+  handleContextMenu,
 }: SlotSectionProps): JSX.Element => {
   return (
     <>
@@ -171,6 +306,7 @@ const SlotSection = ({
           handleClickOpen={handleClickOpen}
           handleShiftClick={handleShiftClick}
           handleDragAndDrop={handleDragAndDrop}
+          handleContextMenu={handleContextMenu}
         />
       ))}
     </>
