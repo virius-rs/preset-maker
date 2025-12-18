@@ -28,6 +28,7 @@
     "@octokit/rest": "^22.0.1",
     "@reduxjs/toolkit": "^1.9.1",
     "@vercel/og": "^0.8.6",
+    "@vitejs/plugin-react": "^4.5.2",
     "axios": "^1.3.4",
     "copy-image-clipboard": "^2.1.2",
     "file-saver": "^2.0.5",
@@ -48,7 +49,8 @@
     "sanitize-html": "^2.10.0",
     "typescript-json": "^3.3.43",
     "typia": "^3.8.3",
-    "zod": "^3.25.64"
+    "zod": "^3.25.64",
+    "vite": "^6.3.5"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^10.0.1",
